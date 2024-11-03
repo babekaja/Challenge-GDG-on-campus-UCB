@@ -39,7 +39,7 @@ Ce projet est une application web de gestion des utilisateurs, développée avec
    ```
 
 4. Accédez à l'application via `http://127.0.0.1:8000`.
-5. AAccédez à l'application via internet sur ce lien `barnabe.pythonanywhere.com`.
+5. Accédez à l'application via internet sur ce lien `barnabe.pythonanywhere.com`.
 
 
 
