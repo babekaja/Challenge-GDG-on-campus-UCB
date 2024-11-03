@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier Profil</title>
+    <style>
+        /* Styles de base pour la page */
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+        
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #6a11cb;
+        }
+        /* Media queries pour adaptabilité */
+        
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding: 15px;
+            }
+            button {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.3rem;
+            }
+            .container {
+                padding: 10px;
+            }
+            button {
+                padding: 6px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Modifier Profil</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %} {{ form.as_p }}
+            <!-- Affiche le formulaire avec tous les champs -->
+
+            <button type="submit">Enregistrer les modifications</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

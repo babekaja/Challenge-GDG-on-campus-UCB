@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Tableau de bord</title>
+    <style>
+        /* Styles globaux */
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .profile-info {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .profile-info img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            object-fit: cover;
+        }
+        
+        .profile-info div {
+            flex: 1;
+        }
+        
+        p {
+            margin: 5px 0;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .deconnexion,
+        .edit-btn,
+        .user-list-btn {
+            display: inline-block;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            margin-right: 5px;
+        }
+        
+        .deconnexion {
+            background-color: #4CAF50;
+        }
+        
+        .edit-btn {
+            background-color: #0015ff;
+        }
+        
+        .user-list-btn {
+            background-color: #ff5722;
+        }
+        
+        .deconnexion:hover {
+            background-color: #45a049;
+        }
+        
+        .edit-btn:hover {
+            background-color: #0a3cb7;
+        }
+        
+        .user-list-btn:hover {
+            background-color: #e64a19;
+        }
+    </style>
+</head>
+
+<body>
+    {% load static %} {% load static %}
+
+    <div class="container">
+        <h2>Tableau de bord</h2>
+
+        <div class="profile-info">
+            {% if utilisateur.image %}
+            <img src="{{ utilisateur.image.url }}" alt="Image de profil"> {% else %}
+            <img src="{% static 'images/default_profile.png' %}" alt="Image de profil par défaut"> {% endif %}
+            <div>
+                <p><strong>Nom :</strong> {{ utilisateur.nom }}</p>
+                <p><strong>Email :</strong> {{ utilisateur.email }}</p>
+                <p><strong>Téléphone :</strong> {{ utilisateur.telephone }}</p>
+                <p><strong>Adresse :</strong> {{ utilisateur.adresse }}</p>
+                <p><strong>Sexe :</strong> {{ utilisateur.sexe }}</p>
+            </div>
+        </div>
+
+        <a href="{% url 'modifier_profil' utilisateur.id %}" class="edit-btn">Modifier les informations</a>
+        <a href="{% url 'deconnexion' %}" class="deconnexion">Se déconnecter</a>
+        <a href="{% url 'liste_utilisateurs' %}" class="user-list-btn">Voir la liste des utilisateurs</a>
+    </div>
+
+</body>
+
+</html>

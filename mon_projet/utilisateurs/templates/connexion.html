@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Connexion</title>
+    <style>
+        /* Global Styles */
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        /* Error message notification */
+        
+        .error-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #f44336;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateX(100%);
+        }
+        
+        .error-notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .error-notification.hide {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        /* Form styling */
+        
+        form {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        label {
+            display: block;
+            text-align: left;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        
+        input[type="password"]:focus,
+        input[type="password"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #6a11cb;
+        }
+        /* Link */
+        
+        .link {
+            margin-top: 15px;
+            color: #666;
+        }
+        
+        .link a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        .link a:hover {
+            color: #6a11cb;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Affichage des messages d'erreur -->
+    {% if messages %}
+    <div class="error-notification" id="errorNotification">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form action="{% url 'connexion' %}" method="post">
+        <h1>Connexion</h1>
+
+        {% csrf_token %}
+
+        <!-- Utilisation de {{ form }} pour générer les champs du formulaire -->
+        <label for="email">Email d'utilisateur</label>
+        <input type="email" name="email" id="email" required>
+
+        <label for="password">Mot de Passe</label>
+        <input type="password" name="mot_de_passe" id="mot_de_passe" required>
+
+        <button type="submit">Se connecter</button>
+        <p class="link">Pas encore inscrit ? <a href="{% url 'inscription' %}">S'inscrire</a></p>
+    </form>
+
+    <script>
+        // Affichage et disparition de la notification d'erreur
+        document.addEventListener('DOMContentLoaded', function() {
+            const errorNotification = document.getElementById('errorNotification');
+            if (errorNotification) {
+                // Afficher la notification
+                errorNotification.classList.add('show');
+
+                // Masquer après 3 secondes
+                setTimeout(function() {
+                    errorNotification.classList.remove('show');
+                    errorNotification.classList.add('hide');
+                }, 3000); // 3 secondes avant de disparaître
+            }
+        });
+    </script>
+
+</body>
+
+</html>
